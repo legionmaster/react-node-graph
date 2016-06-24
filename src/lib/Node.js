@@ -12,11 +12,11 @@ export default class Node extends React.Component {
   }
 
   handleDragStop(event, ui) {
-    this.props.onNodeStop(this.props.nid, ui.position);
+    this.props.onNodeStop(this.props.nid, ui);
   }
 
   handleDrag(event, ui) {
-    this.props.onNodeMove(this.props.index, ui.position);
+    this.props.onNodeMove(this.props.index, ui);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,16 +31,16 @@ export default class Node extends React.Component {
     this.props.onCompleteConnector(this.props.nid, index);
   }
 
-	render() {
-		return (
-      <Draggable 
-        start={{x:this.props.pos.x,y:this.props.pos.y}}
+  render() {
+    return (
+      <Draggable
+        position={{x:this.props.pos.x,y:this.props.pos.y}}
         handle=".node-header"
         onStart={(event, ui)=>this.handleDragStart(event, ui)}
         onStop={(event, ui)=>this.handleDragStop(event, ui)}
         onDrag={(event, ui)=>this.handleDrag(event, ui)}>
-			<section className="node" style={{zIndex:10000}}>
-          <header className="node-header" style={{backgroundColor:this.props.color}}>                      
+      <section className="node" style={{zIndex:10000}}>
+          <header className="node-header" style={{backgroundColor:this.props.color}}>
             <span className="node-title">{this.props.title}</span>
           </header>
           <div className="node-content">
@@ -49,7 +49,7 @@ export default class Node extends React.Component {
           </div>
       </section>
       </Draggable>
-		);
-	}
+    );
+  }
 }
 
